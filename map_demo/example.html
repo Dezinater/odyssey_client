@@ -40,6 +40,13 @@
 		async: false
 	});
 
+	var myIcon = L.icon({
+		iconUrl: 'car_icon.png',
+		iconSize: [20, 20],
+		iconAnchor: [10, 10],
+		popupAnchor: [-3, -76],
+	});
+
 	var map = L.map('my-map').setView([43.686836, -79.764626], 14);
 	
 	// The API Key provided is restricted to JSFiddle website
@@ -107,26 +114,47 @@
 		routes = data.features[0].geometry.coordinates;
 	});
 
-	// Plot each route on the map
+	// Fix routes to switch lat and long
+	routes_fixed = [];
+
 	for (var i = 0; i < routes.length; i++) {
-
-		// First flip route to lonlat
-		console.log(routes[i]);
-
-		// contert to lonlat
-		var lonlat = [];
+		temp_route = [];
 		for (var j = 0; j < routes[i].length; j++) {
-			lonlat.push([routes[i][j][1], routes[i][j][0]]);
+			temp_route.push([routes[i][j][1], routes[i][j][0]]);
 		}
+		routes_fixed.push(temp_route);
+	}
 	
-		L.polyline(lonlat, {
+	// Plot each route on the map
+	for (var i = 0; i < routes_fixed.length; i++) {
+		L.polyline(routes_fixed[i], {
 			color: 'red',
 			weight: 5,
 			opacity: 0.5,
 			smoothFactor: 1
 		}).addTo(map);
 	}
-	
+
+	// Wait few seconds and then animate car going from points to go station
+		setTimeout(function() {
+			var car = L.marker(routes_fixed[0][0], {
+				icon: myIcon
+			}).addTo(map);
+			var car_route = routes_fixed[0];
+			var car_route_length = car_route.length;
+			var car_route_index = 0;
+			var car_route_interval = setInterval(function() {
+				car.setLatLng(car_route[car_route_index]);
+				car_route_index++;
+				if (car_route_index >= car_route_length) {
+					clearInterval(car_route_interval);
+				}
+			}, 1000);
+		}, 3000);
+
+
+
+
 
 </script>
 
