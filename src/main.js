@@ -17,11 +17,12 @@ const test = require('./stops.txt');
 import stopsList from './stops.txt';
 import routesList from './stop_times.txt';
 
-let stops = {};
+let stops = [];
 let stopTimes = {};
 stopsList.split('\n').forEach(line => {
   let lineData = line.trim().split(',');
-  stops[lineData[0]] = { name: lineData[1], lat: parseFloat(lineData[2]), lng: parseFloat(lineData[3]),  };
+  //stops[lineData[0]] = { name: lineData[1], lat: parseFloat(lineData[2]), lng: parseFloat(lineData[3]),  };
+  stops.push({ id: lineData[0], name: lineData[1], lat: parseFloat(lineData[2]), lng: parseFloat(lineData[3])})
   stopTimes[lineData[0]] = new Set();
 });
 
@@ -36,6 +37,16 @@ routesList.split('\n').forEach(line => {
 for (let key of Object.keys(stopTimes)) {
   stopTimes[key] = Array.from(stopTimes[key]).sort();
 }
+
+stops.splice(0, 1);
+stops.splice(stops.length-1, 1);
+// stopTimes.splice(0, 1);
+
+stops.sort((a,b) => {
+  return a.name.localeCompare(b.name);
+})
+
+console.log(stops);
 
 store.commit('setGoStations', stops);
 store.commit('setGoStationTimes', stopTimes);

@@ -5,7 +5,7 @@
         </div>
         <div id="selectStation">
             <select>
-                <option v-for="(key, value) in $store.getters.getGoStations" value="volvo">Volvo</option>
+                <option v-for="(value, key) in $store.getters.getGoStations" :key="key" :value="key">{{value.name}}</option>
             </select>
         </div>
     </div>
