@@ -3,7 +3,7 @@ export default class NetworkClient {
         this.packetPromises = {};
         this.currentPacketId = 0;
         this.eventHandlers = {};
-        this.connect("localhost", 42069);
+        //this.connect("localhost", 42069);
 
         this.onConnect = [];
         this.onDisconnect = [];
