@@ -10,10 +10,9 @@ new Vue({
   router,
   render: h => h(App)
 }).$mount('#app')
-/*
-const fs = require('fs');
-const test = require('./stops.txt');
-*/
+
+/*const fs = require('fs');
+const test = require('./stops.txt');*/
 import stopsList from './stops.txt';
 import routesList from './stop_times.txt';
 
@@ -41,10 +40,11 @@ store.commit('setGoStations', stops);
 store.commit('setGoStationTimes', stopTimes);
 console.log(store.getters.getGoStationTimes('00005'));
 //console.log(stops);
-/*
+
 fetch('./stops.txt')
   .then((response) => response.text())
   .then((text) => {
     console.log(text);
   });
-  */
+  
+
