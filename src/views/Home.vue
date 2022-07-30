@@ -7,6 +7,7 @@
             <router-link to="/findRide"><button>Find Ride</button></router-link>
         </div>
         <div id="mapContainer">
+            <Map></Map>
         </div>
         <div id="myRides">
             <ListContainer></ListContainer>
@@ -20,13 +21,15 @@
 <script>
 import HeaderLogo from '../components/HeaderLogo.vue';
 import ListContainer from '../components/ListContainer.vue';
+import Map from '../components/Map.vue';
 // @ is an alias to /src
 
 export default {
     name: 'Home',
     components: {
     HeaderLogo,
-    ListContainer
+    ListContainer,
+    Map
 }
 }
 </script>
