@@ -9,8 +9,16 @@ let networkClient = new NetworkClient();
 export default new Vuex.Store({
   state: {
     networkClient,
+    goStations:[],
+    goStationsTimes:[],
   },
   mutations: {
+    setGoStations(state, goStations) {
+      state.goStations = goStations;
+    },
+    setGoStationTimes(state, goStationsTimes) {
+      state.goStationsTimes = goStationsTimes;
+    },
   },
   actions: {
   },
@@ -23,5 +31,11 @@ export default new Vuex.Store({
     getNetworkClient: (state) => {
       return state.networkClient;
     },
+    getGoStations: (state) => {
+      return state.goStations;
+    },
+    getGoStationTimes: (state) => (station) => {
+      return state.goStationsTimes[station];
+    }
   },
 })

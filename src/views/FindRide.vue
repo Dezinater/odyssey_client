@@ -3,6 +3,11 @@
         <div id="logoContainer">
             <HeaderLogo></HeaderLogo>
         </div>
+        <div id="selectStation">
+            <select>
+                <option v-for="(key, value) in $store.getters.getGoStations" value="volvo">Volvo</option>
+            </select>
+        </div>
     </div>
 </template>
 

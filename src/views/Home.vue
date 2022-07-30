@@ -4,7 +4,7 @@
             <HeaderLogo></HeaderLogo>
         </div>
         <div id="findRide">
-            <button>Find Ride</button>
+            <router-link to="/findRide"><button>Find Ride</button></router-link>
         </div>
         <div id="mapContainer">
         </div>
