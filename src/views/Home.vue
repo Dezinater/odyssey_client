@@ -13,7 +13,7 @@
             <ListContainer name="Upcoming Rides" :data="$store.getters.getUpcomingRides"></ListContainer>
         </div>
         <div id="previousRides">
-            <ListContainer name="Previous Rides" :data="$store.getters.getPreviousRides"></ListContainer>
+            <ListContainer :isPreviousRide="true" name="Previous Rides" :data="$store.getters.getPreviousRides"></ListContainer>
         </div>
     </div>
 </template>

@@ -26,7 +26,10 @@ export default new Vuex.Store({
     },
     removeUpcomingRide(state, index) {
       state.upcomingRides.splice(index, 1);
-    }
+    },
+    addPreviousRide(state, data) {
+      state.previousRides.push(data)
+    },
   },
   actions: {
   },
@@ -47,6 +50,9 @@ export default new Vuex.Store({
     },
     getUpcomingRides: (state) => {
       return state.upcomingRides;
+    },
+    getPreviousRides: (state) => {
+      return state.previousRides;
     },
   },
 })

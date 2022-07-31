@@ -60,5 +60,7 @@ store.commit('setGoStationTimes', stopTimes);
 //console.log(store.getters.getGoStationTimes('00005'));
 //console.log(stops);
 
-
+store.commit("addPreviousRide", { name: "Bramalea GO", time: "Yesterday 5:35:00" });
+store.commit("addPreviousRide", { name: "Brampton GO", time: "29/07/22 1:20:00" });
+            
 

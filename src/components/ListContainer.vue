@@ -9,8 +9,8 @@
                     <h3>{{ value.name }}</h3>
                     <p>{{ value.time }}</p>
                 </div>
-                <div class="action" @click="openRide(index, false)">
-                    >
+                <div class="action" @click="openRide(index)">
+                    <i class="material-icons">keyboard_arrow_right</i>
                 </div>
             </div>
         </div>
@@ -20,10 +20,11 @@
 <script>
 export default {
     name: 'HeaderLogo',
-    props: ["name", "data"],
+    props: ["name", "data", "isPreviousRide"],
     methods: {
-        openRide(index, isPreviousRide) {
-            this.$router.push({ name: 'View Ride', params: { rideIndex:index, isPreviousRide } })
+        openRide(index) {
+            console.log(this.isPreviousRide);
+            this.$router.push({ name: 'View Ride', params: { rideIndex: index, isPreviousRide: this.isPreviousRide } })
         },
     },
 }

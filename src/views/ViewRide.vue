@@ -7,14 +7,17 @@
             <button id="backButton" @click="back">Back</button>
         </div>
         <div id="stationInfo">
-            <h2>test</h2>
-            <h2>{{ rideIndex }}</h2>
+            <h1 v-if="!isPreviousRide">{{ $store.getters.getUpcomingRides[rideIndex].name }}</h1>
+            <h1 v-if="isPreviousRide">{{ $store.getters.getPreviousRides[rideIndex].name }}</h1>
+
+            <h3 v-if="!isPreviousRide">{{ $store.getters.getUpcomingRides[rideIndex].time }}</h3>
+            <h3 v-if="isPreviousRide">{{ $store.getters.getPreviousRides[rideIndex].time }}</h3>
         </div>
         <div id="mapContainer">
             <Map :addresses="addresses" :hideCar="true"></Map>
         </div>
 
-        <div id="cancel">
+        <div id="cancel" v-if="!isPreviousRide">
             <button id="cancelButton" @click="cancel">Cancel</button>
         </div>
     </div>
@@ -31,9 +34,6 @@ export default {
         Map,
     },
     props: ["isPreviousRide", "rideIndex"],
-    mounted() {
-console.log(this.rideIndex);
-    },
     data() {
         return {
             addresses: ["4446 Castlemore Rd, Brampton, Ontario"],
@@ -45,8 +45,8 @@ console.log(this.rideIndex);
         },
         cancel() {
             this.$router.push("/");
-            let times = this.$store.getters.getGoStationTimes(this.selectedStation.id);
-            this.$store.commit("addUpcomingRide", { name: this.selectedStation.name, time: times[this.$refs.selectedTime.value] });
+            //let times = this.$store.getters.getGoStationTimes(this.selectedStation.id);
+            this.$store.commit("removeUpcomingRide", this.rideIndex);
             console.log(this.$store.getters.getUpcomingRides);
         },
     }
@@ -54,6 +54,14 @@ console.log(this.rideIndex);
 </script>
 
 <style scoped>
+h1 {
+    margin:0;
+    padding:0;
+}
+
+#stationInfo {
+    text-align: center;
+}
 #main {
     position: relative;
 }
