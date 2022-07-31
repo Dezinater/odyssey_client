@@ -46,17 +46,12 @@ stops.sort((a, b) => {
   return a.name.localeCompare(b.name);
 })
 
-console.log(stopTimes);
+//console.log(stopTimes);
 
 store.commit('setGoStations', stops);
 store.commit('setGoStationTimes', stopTimes);
 //console.log(store.getters.getGoStationTimes('00005'));
 //console.log(stops);
 
-fetch('./stops.txt')
-  .then((response) => response.text())
-  .then((text) => {
-    console.log(text);
-  });
   
 
