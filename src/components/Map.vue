@@ -100,7 +100,7 @@ export default {
         startCar(loadedRoute) {
             let myIcon = L.icon({
                 iconUrl: 'car_icon.png',
-                iconSize: [20, 20],
+                iconSize: [22, 20],
                 iconAnchor: [10, 10],
                 popupAnchor: [-3, -76],
             });
