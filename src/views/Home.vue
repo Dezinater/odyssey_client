@@ -10,10 +10,10 @@
             <Map></Map>
         </div>
         <div id="myRides">
-            <ListContainer></ListContainer>
+            <ListContainer name="Upcoming Rides" :data="$store.getters.getUpcomingRides"></ListContainer>
         </div>
         <div id="previousRides">
-            <ListContainer></ListContainer>
+            <ListContainer name="Previous Rides" :data="$store.getters.getPreviousRides"></ListContainer>
         </div>
     </div>
 </template>

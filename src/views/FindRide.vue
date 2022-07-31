@@ -9,7 +9,7 @@
                 <option v-for="(value, key) in $store.getters.getGoStations" :key="key" :value="key">{{ value.name }}
                 </option>
             </select>
-            <select v-if="selectedStation != null">
+            <select v-if="selectedStation != null" ref="selectedTime">
                 <option v-for="(value, index) in $store.getters.getGoStationTimes(selectedStation.id)" :key="index"
                     :value="index">{{ value }}</option>
             </select>
@@ -62,12 +62,12 @@ export default {
     methods: {
         purchase() {
             this.$router.push("/");
-            console.log(this.selectedStation);
+            let times = this.$store.getters.getGoStationTimes(this.selectedStation.id);
+            this.$store.commit("addUpcomingRide", {name:this.selectedStation.name, time:times[this.$refs.selectedTime.value]});
+            console.log(this.$store.getters.getUpcomingRides);
         },
         onChange(event) {
             this.selectedStation = this.$store.getters.getGoStations[event.target.value];
-            console.log(this.selectedStation);
-            console.log(this.$store.getters.getGoStationTimes('00005'))
         }
     }
 }
