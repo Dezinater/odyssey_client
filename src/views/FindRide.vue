@@ -4,6 +4,7 @@
             <HeaderLogo></HeaderLogo>
         </div>
         <div id="selectStation">
+            <h2>Select Destination</h2>
             <select @change="onChange($event)">
                 <option v-for="(value, key) in $store.getters.getGoStations" :key="key" :value="key">{{ value.name }}
                 </option>
@@ -13,26 +14,56 @@
                     :value="index">{{ value }}</option>
             </select>
         </div>
+        <div id="mapContainer">
+            <Map :addresses="addresses" :hideCar="true"></Map>
+        </div>
+        <div id="receipt">
+            <div class="receiptItem">
+                <div class="receiptTitle">Deposit</div>
+                <div class="divider"></div>
+                <div class="receiptPrice">$5.00</div>
+            </div>
+            <div class="receiptItem">
+                <div class="receiptTitle">Tax</div>
+                <div class="divider"></div>
+                <div class="receiptPrice">$1.00</div>
+            </div>
+            <div class="receiptItem">
+                <div class="receiptTitle"><b>Total</b></div>
+                <div class="divider"></div>
+                <div class="receiptPrice"><b>$6.00</b></div>
+            </div>
+        </div>
+        <div id="purchase">
+            <button id="purchaseButton" @click="purchase">Authorize Purchase</button>
+        </div>
     </div>
 </template>
 
 <script>
 import HeaderLogo from '../components/HeaderLogo.vue';
+import Map from '../components/Map.vue';
 
 export default {
     name: 'FindRide',
     components: {
         HeaderLogo,
+        Map,
     },
     mounted() {
         this.selectedStation = this.$store.getters.getGoStations[0];
     },
     data() {
         return {
+            addresses: ["12 Jay St, Brampton, Ontario", "144 Wexford Rd, Brampton, Ontario", "137 Richvale Dr S, Brampton, Ontario"],
             selectedStation: null,
         }
     },
     methods: {
+        purchase() {
+            this.$router.push("/");
+            console.log(this.selectedStation);
+        },
         onChange(event) {
             this.selectedStation = this.$store.getters.getGoStations[event.target.value];
             console.log(this.selectedStation);
@@ -41,3 +72,51 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+#purchaseButton{
+    margin-top:2em;
+    width:420px;
+    height: 50px;
+    font-size:24px;
+    border-radius:20px;
+    border:none;
+    color:whitesmoke;
+    background-color:#3ab346;
+    transition:all 140ms;
+    cursor: pointer;
+}
+#purchaseButton:hover{
+    background-color:#249D30;
+}
+h2 {
+    text-align: left;
+    padding: 0;
+    margin: 0 2em;
+}
+
+select {
+    padding: 0.6em;
+    font-size: 16px;
+    margin-top: 1em;
+}
+
+#selectStation {
+    padding: 1em 1em;
+}
+#receipt {
+    padding-top:1.6em;
+    font-size:20px;
+    width:300px;
+    margin:auto auto;
+}
+.receiptItem {
+    display:flex;
+    margin:0.6em;
+}
+.divider {
+    flex:1;
+    margin:0 0.6em;
+}
+</style>
+

@@ -12,13 +12,17 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-/*.logo{
+.logo{
     font-size: 50px;
     font-weight:300px ;
-    width:30px;
-    height: 30px;
-    background-color:#EAE509;
     color: #7DCE13;
-    margin: auto;
-}*/
+    padding-top:0.3em;
+    padding-bottom:0.8em;
+}
+.go {
+    background-color: #7DCE13;
+    color:#f6f6f6;
+    padding:0 5px;
+    border-radius: 7px;
+}
 </style>
