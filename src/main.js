@@ -63,4 +63,11 @@ store.commit('setGoStationTimes', stopTimes);
 store.commit("addPreviousRide", { name: "Bramalea GO", time: "Yesterday 5:35:00" });
 store.commit("addPreviousRide", { name: "Brampton GO", time: "29/07/22 1:20:00" });
             
+import L from "leaflet";
+delete L.Icon.Default.prototype._getIconUrl;
 
+L.Icon.Default.mergeOptions({
+   iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
+   iconUrl: require('leaflet/dist/images/marker-icon.png'),
+   shadowUrl: require('leaflet/dist/images/marker-shadow.png'),
+});

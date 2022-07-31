@@ -50,7 +50,7 @@ export default {
             .bindPopup('Go Station')
             .openPopup();
 
-        let address = ["21 Horne Dr, Brampton, Ontario", "16 Linkdale Rd, Brampton", "97 Kingswood Dr, Brampton"];
+        let address = ["16 Linkdale Rd, Brampton", "21 Horne Dr, Brampton, Ontario",  "97 Kingswood Dr, Brampton"];
         if (this.addresses != undefined) { //if the prop is set then overwrite the example
             address = this.addresses;
         }
@@ -123,7 +123,7 @@ export default {
 
                 car.setLatLng(loadedRoute[routeNumber][routeIndex]);
                 routeIndex++;
-            }, 1000);
+            }, 750);
         },
         drawRoutes(routes) {
             this.routeLines.forEach(x => x.remove());

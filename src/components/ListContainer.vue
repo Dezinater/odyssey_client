@@ -4,12 +4,12 @@
             <h2>{{ name }}</h2>
         </div>
         <div id="list">
-            <div class="listItem" v-for="(value, index) in data" :key="index">
+            <div class="listItem" v-for="(value, index) in data" :key="index" :class="{upcomingRideItem: !isPreviousRide}" >
                 <div class="itemInfo">
                     <h3>{{ value.name }}</h3>
                     <p>{{ value.time }}</p>
                 </div>
-                <div class="action" @click="openRide(index)">
+                <div class="action" :class="{upcomingRideAction: !isPreviousRide, previousRideAction: isPreviousRide}" @click="openRide(index)">
                     <i class="material-icons">keyboard_arrow_right</i>
                 </div>
             </div>
@@ -33,6 +33,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 h3 {
+    color:#333;
     padding: 0;
     margin: 0;
 }
@@ -48,6 +49,10 @@ h3 {
     margin: 1em 1em;
 }
 
+.upcomingRideItem {
+    border: 1px solid #aaf0b1 !important;
+}
+
 .itemInfo {
     flex: 1;
     text-align: left;
@@ -60,15 +65,26 @@ h3 {
     color: white;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
-    background-color: #3ab346;
     transition: all 140ms;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.action:hover {
-    background-color: #249D30;
+
+
+.upcomingRideAction {
+    background-color: #3ab346;
+}
+.upcomingRideAction:hover {
+    background-color: #148f20;
+}
+
+.previousRideAction {
+    background-color: #75d87f;
+}
+.previousRideAction:hover {
+    background-color: #60bd69;
 }
 
 #listContainer {
