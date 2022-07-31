@@ -18,7 +18,7 @@
             </select>
         </div>
         <div id="mapContainer">
-            <Map :addresses="addresses" :hideCar="true"></Map>
+            <Map :addresses="addresses" :destination="[this.selectedStation.lat, this.selectedStation.lng]" :hideCar="true"></Map>
         </div>
         <div id="receipt">
             <div class="receiptItem">

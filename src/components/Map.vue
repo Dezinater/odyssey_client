@@ -14,6 +14,7 @@ export default {
     data() {
         return {
             routeLines: [],
+            mapIcon:null,
             updateTimer: null,
             map: null,
             markers: [],
@@ -46,7 +47,7 @@ export default {
 
 
         var goStation = [43.686836, -79.764626]
-        L.marker(goStation).addTo(this.map)
+        this.mapMarker = L.marker(goStation).addTo(this.map)
             .bindPopup('Go Station')
             .openPopup();
 
@@ -75,6 +76,40 @@ export default {
         });
 
     },
+    watch: {
+    // whenever question changes, this function will run
+    destination(newVal) {
+        console.log(newVal);
+        this.mapMarker.remove();
+        this.mapMarker = L.marker(newVal).addTo(this.map)
+            .bindPopup('Go Station')
+            .openPopup();
+
+        let goStation = newVal;
+        let address = ["16 Linkdale Rd, Brampton", "21 Horne Dr, Brampton, Ontario",  "97 Kingswood Dr, Brampton"];
+        if (this.addresses != undefined) { //if the prop is set then overwrite the example
+            address = this.addresses;
+        }
+        let addressPromises = [];
+        address.forEach(x => addressPromises.push(this.getLatLong(x)));
+
+        Promise.all(addressPromises).then(x => {
+            x.forEach(coord => {
+                coord = [coord[1], coord[0]];
+                L.marker(coord).addTo(this.map);
+            });
+            x = x.map(coord => [coord[1], coord[0]]);
+
+            x.push([goStation[0], goStation[1]]);
+            this.loadRoutes(x).then(loadedRoute => {
+                this.drawRoutes(loadedRoute);
+                if(this.hideCar !== true) {
+                    this.startCar(loadedRoute);
+                }
+            });
+        });
+    }
+  },
     methods: {
         loadRoutes(waypoints) {
             let waypointsString = "";
