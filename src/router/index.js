@@ -19,6 +19,12 @@ const routes = [
     path: '/findRide',
     name: 'Find Ride',
     component: () => import('../views/FindRide.vue')
+  },
+  {
+    path: '/viewRide',
+    name: 'View Ride',
+    props:true,
+    component: () => import('../views/ViewRide.vue')
   }
 ]
 

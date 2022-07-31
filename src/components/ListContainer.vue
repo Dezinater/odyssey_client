@@ -9,7 +9,7 @@
                     <h3>{{ value.name }}</h3>
                     <p>{{ value.time }}</p>
                 </div>
-                <div class="action">
+                <div class="action" @click="openRide(index, false)">
                     >
                 </div>
             </div>
@@ -21,6 +21,11 @@
 export default {
     name: 'HeaderLogo',
     props: ["name", "data"],
+    methods: {
+        openRide(index, isPreviousRide) {
+            this.$router.push({ name: 'View Ride', params: { rideIndex:index, isPreviousRide } })
+        },
+    },
 }
 </script>
 

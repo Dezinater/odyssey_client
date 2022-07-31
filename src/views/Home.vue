@@ -7,7 +7,7 @@
             <router-link to="/findRide" ><button class="bn632-hover bn22">Find Ride</button></router-link>
         </div>
         <div id="mapContainer">
-            <Map></Map>
+            <Map v-if="$store.getters.getUpcomingRides.length > 0"></Map>
         </div>
         <div id="myRides">
             <ListContainer name="Upcoming Rides" :data="$store.getters.getUpcomingRides"></ListContainer>

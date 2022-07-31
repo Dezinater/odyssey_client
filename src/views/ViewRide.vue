@@ -3,29 +3,135 @@
         <div id="logoContainer">
             <HeaderLogo></HeaderLogo>
         </div>
-
-        <div id="rideInfo">
-            <h3>Bramalea Go Station</h3>
-            <h5>Today at 5 PM</h5>
+        <div id="back">
+            <button id="backButton" @click="back">Back</button>
         </div>
-
-        <span>Back</span>
-
+        <div id="stationInfo">
+            <h2>test</h2>
+            <h2>{{ rideIndex }}</h2>
+        </div>
         <div id="mapContainer">
+            <Map :addresses="addresses" :hideCar="true"></Map>
         </div>
 
-        <button v-if="!isPreviousRide">Cancel Ride</button>
+        <div id="cancel">
+            <button id="cancelButton" @click="cancel">Cancel</button>
+        </div>
     </div>
 </template>
 
 <script>
 import HeaderLogo from '../components/HeaderLogo.vue';
+import Map from '../components/Map.vue';
 
 export default {
-    name: 'ViewRide',
+    name: 'FindRide',
     components: {
         HeaderLogo,
+        Map,
     },
-    props: ["isPreviousRide"],
+    props: ["isPreviousRide", "rideIndex"],
+    mounted() {
+console.log(this.rideIndex);
+    },
+    data() {
+        return {
+            addresses: ["4446 Castlemore Rd, Brampton, Ontario"],
+        }
+    },
+    methods: {
+        back() {
+            this.$router.push("/");
+        },
+        cancel() {
+            this.$router.push("/");
+            let times = this.$store.getters.getGoStationTimes(this.selectedStation.id);
+            this.$store.commit("addUpcomingRide", { name: this.selectedStation.name, time: times[this.$refs.selectedTime.value] });
+            console.log(this.$store.getters.getUpcomingRides);
+        },
+    }
 }
 </script>
+
+<style scoped>
+#main {
+    position: relative;
+}
+
+#back {
+    position: absolute;
+    display: flex;
+    margin-bottom: 3em;
+    top: 20px;
+}
+
+#backButton {
+    background: white;
+    color: #249D30;
+    border: 1px solid #3ab346;
+    font-size: 16px;
+    width: 128px;
+    height: 32px;
+    border-radius: 15px;
+    transition: all 200ms;
+    cursor: pointer;
+}
+
+#backButton:hover {
+    background-color: #3ab346;
+    color: white;
+    border: 1px solid #309c3b;
+}
+
+#cancelButton {
+    margin-top: 2em;
+    width: 420px;
+    height: 50px;
+    font-size: 24px;
+    border-radius: 20px;
+    border: none;
+    color: #b33756;
+    border: 1px solid #b33756;
+    transition: all 140ms;
+    cursor: pointer;
+}
+
+#cancelButton:hover {
+    background-color: #c41642;
+    color: white;
+}
+
+h2 {
+    text-align: left;
+    padding: 0;
+    margin: 0 2em;
+}
+
+select {
+    padding: 0.6em;
+    font-size: 16px;
+    margin-top: 1em;
+}
+
+#selectStation {
+    padding: 1em 1em;
+}
+
+#receipt {
+    padding-top: 1.6em;
+    font-size: 20px;
+    width: 300px;
+    margin: auto auto;
+}
+
+.receiptItem {
+    display: flex;
+    margin: 0.6em;
+}
+
+.divider {
+    flex: 1;
+    margin: 0 0.6em;
+}
+</style>
+
